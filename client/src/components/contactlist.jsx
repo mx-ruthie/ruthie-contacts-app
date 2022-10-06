@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import NewContact from "./newcontact";
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([]);
@@ -16,9 +17,13 @@ const ContactList = () => {
     getContacts();
     console.log("hey I'm running");
   
-  }, []);
+  }, [contacts]);
   return(
-    <div className="contactTable" class="col-8">
+    <div className="container">
+      <div className="row">
+    <NewContact />
+     <div className="col-8">
+      <div>
       <table className="table table-dark">
   <thead>
     <tr>
@@ -50,6 +55,9 @@ const ContactList = () => {
     
   </tbody>
 </table>
+    </div>
+    </div>
+    </div>
     </div>
   )
 };
