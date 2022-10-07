@@ -1,7 +1,9 @@
 import { useState } from "react";
+import ContactSearch from "./contactsearch";
 
-
+//special Thanks to Angel for sharing their Species form with me on GitHub as a reference for building my own form in this project
 const NewContact = (props) => {
+  //sets the state of multiple form fields at once
   const [newContact, setNewContact]= useState({
     name: "",
     email: "",
@@ -46,9 +48,10 @@ const NewContact = (props) => {
     .then((data) => {
       console.log("From the post ", data);
       props.addContact(data);
-      //handleNotes(data);
+      //callback, contactlist.jsx function addContact
     });
 };
+//using this to reset the form in react to blank after submit > setNewContact(emptyContact); in the handleSubmit
 let emptyContact ={
   name: "",
   email: "",
@@ -100,6 +103,7 @@ const handleSubmit = (e) => {
         <input type="submit" value="Submit" />
         
       </form>
+      <ContactSearch />
     </div>
   );
 };
