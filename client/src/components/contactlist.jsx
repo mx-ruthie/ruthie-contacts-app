@@ -1,24 +1,53 @@
 import { useState, useEffect } from "react";
+import NewContact from "./newcontact";
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([]);
   //retrieving the contacts data from my database
-  const getContacts = () => {
-    fetch("http://localhost:8080/api/contacts")
-    .then ((res) => res.json())
-    .then ((res) => {
-      setContacts(res);
-      console.log("this is res", res);
-    });
+  // const getContacts = () => {
+  //   fetch("http://localhost:8080/api/contacts")
+  //   .then ((res) => res.json())
+  //   .then ((res) => {
+  //     setContacts(res);
+  //     console.log("this is res", res);
+  //   });
+  // };
+
+  const addContact = (newContact) => {
+    setContacts((contacts) => [...contacts, newContact]);
   };
 
+  const getContacts = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/contacts');
+  
+      if (!response.ok) {
+        throw new Error(`Error! status: ${response.status}`);
+      }
+  
+      const result = await response.json();
+      setContacts(result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
   useEffect(() => {
     getContacts();
-    console.log("hey I'm running");
-  
   }, []);
+
+  // useEffect(() => {
+  //   getContacts();
+  //   console.log("hey I'm running");
+  
+  // }, [contacts]);
   return(
-    <div className="contactTable" class="col-8">
+    <div className="container">
+      <div className="row">
+    <NewContact addContact={addContact} contacts={contacts}/>
+
+     <div className="col-8">
+      <div>
       <table className="table table-dark">
   <thead>
     <tr>
@@ -50,6 +79,9 @@ const ContactList = () => {
     
   </tbody>
 </table>
+    </div>
+    </div>
+    </div>
     </div>
   )
 };
