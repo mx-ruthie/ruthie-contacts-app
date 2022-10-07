@@ -103,7 +103,7 @@ const handleSubmit = (e) => {
         <input type="submit" value="Submit" />
         
       </form>
-      <ContactSearch />
+      <ContactSearch contacts={props.contacts}/>
     </div>
   );
 };

@@ -44,7 +44,8 @@ const ContactList = () => {
   return(
     <div className="container">
       <div className="row">
-    <NewContact addContact={addContact}/>
+    <NewContact addContact={addContact} contacts={contacts}/>
+
      <div className="col-8">
       <div>
       <table className="table table-dark">
